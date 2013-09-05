@@ -8,7 +8,7 @@
     "ssh_username": "ubuntu",
     "ssh_password": "ubuntu",
     "ssh_wait_timeout": "15m",
-    "shutdown_command": "shutdown -P now",
+    "shutdown_command": "sudo shutdown -P now",
     "http_directory": "ubuntu_installer_files",
     "boot_wait": "5s",
     "boot_command": [
