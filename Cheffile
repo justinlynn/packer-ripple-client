@@ -1,0 +1,5 @@
+site "http://community.opscode.com/api/v1"
+
+cookbook "ripple-client",
+  :git => "https://github.com/justinlynn/cookbook-ripple-client",
+  :ref => "v0.0.1"

@@ -1,0 +1,32 @@
+{
+  "builders": [{
+    "type": "virtualbox",
+    "guest_os_type": "Ubuntu_64",
+    "iso_url": "http://mirrors.us.kernel.org/ubuntu-releases/12.04.3/ubuntu-12.04.3-server-amd64.iso",
+    "iso_checksum": "2cbe868812a871242cdcdd8f2fd6feb9",
+    "iso_checksum_type": "md5",
+    "ssh_username": "ubuntu",
+    "ssh_password": "ubuntu",
+    "ssh_wait_timeout": "15m",
+    "shutdown_command": "shutdown -P now",
+    "http_directory": "ubuntu_installer_files",
+    "boot_wait": "5s",
+    "boot_command": [
+      "<esc><esc><enter><wait>",
+      "/install/vmlinuz noapic ",
+      "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+      "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+      "hostname={{ .Name }} ",
+      "fb=false debconf/frontend=noninteractive ",
+      "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+      "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+      "DEBCONF_DEBUG=5 ",
+      "initrd=/install/initrd.gz -- <enter>"
+    ]
+  }],
+  "provisioners": [{
+    "type": "chef-solo",
+    "cookbook_paths": ["cookbooks"],
+    "run_list": ["recipe[ripple-client]"]
+  }]
+}
